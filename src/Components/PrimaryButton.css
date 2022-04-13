@@ -1,0 +1,21 @@
+.primaryBtn {
+  background-color: #fa1;
+  margin-top: 15px;
+  border: none;
+  outline: none;
+  padding: 10px 20px;
+  border-radius: 7px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 5px 3px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s;
+}
+
+.primaryBtn:hover {
+  box-shadow: 0 0 4px 1.5px rgba(0, 0, 0, 0.3);
+}
+
+.primaryBtn:active {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}

@@ -1,0 +1,20 @@
+.inputContainer {
+  margin-bottom: 6px;
+}
+
+.label {
+  display: inline-block;
+  font-size: 16px;
+  margin-bottom: 6px;
+  color: brown;
+}
+
+.input {
+  padding: 6px 5px;
+  outline: none;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  border: 2px solid sienna;
+  width: 95%;
+}
