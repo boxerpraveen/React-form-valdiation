@@ -18,3 +18,8 @@
   border: 2px solid sienna;
   width: 95%;
 }
+
+.invalidText {
+  color: #f00;
+  font-size: 18px;
+}
