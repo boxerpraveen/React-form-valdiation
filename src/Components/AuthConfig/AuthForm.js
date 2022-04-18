@@ -4,7 +4,6 @@ import PrimaryButton from "../PrimaryButton";
 import "./AuthForm.css";
 
 const AuthForm = () => {
-  const [formValid, setFormValid] = useState(false);
   const [inputs, setInputs] = useState({
     name: { value: "", isValid: false },
     password: { value: "", isValid: false },
@@ -14,7 +13,6 @@ const AuthForm = () => {
   });
 
   function inputChangedHandler(inputIdentifier, enteredValue) {
-    console.log(inputIdentifier, enteredValue.target.value);
     setInputs((curInputs) => {
       return {
         ...curInputs,
@@ -23,9 +21,8 @@ const AuthForm = () => {
     });
   }
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-
+  const onSubmit = (event) => {
+    event.preventDefault();
     const signUpData = {
       name: inputs.name.value,
       password: inputs.password.value,
@@ -50,8 +47,7 @@ const AuthForm = () => {
       signUpData.password === signUpData.confirmPassword &&
       passLengthValidation(signUpData.confirmPassword.trim());
     const emailIsValid = emailValidation(signUpData.email);
-    const phoneIsValid =
-      !isNaN(signUpData.phone) && signUpData.phone.length === 10;
+    const phoneIsValid = signUpData.phone.length === 12;
 
     if (
       nameIsValid ||
@@ -64,35 +60,27 @@ const AuthForm = () => {
         return {
           name: {
             value: curInputs.name.value,
-            isValid: nameIsValid,
+            isValid: !nameIsValid,
           },
           password: {
             value: curInputs.password.value,
-            isValid: passwordIsValid,
+            isValid: !passwordIsValid,
           },
           confirmPassword: {
             value: curInputs.confirmPassword.value,
-            isValid: confirmPasswordIsValid,
+            isValid: !confirmPasswordIsValid,
           },
           email: {
             value: curInputs.email.value,
-            isValid: emailIsValid,
+            isValid: !emailIsValid,
           },
           phone: {
             value: curInputs.phone.value,
-            isValid: phoneIsValid,
+            isValid: !phoneIsValid,
           },
         };
       });
-    }
-    if (
-      nameIsValid &&
-      passwordIsValid &&
-      confirmPasswordIsValid &&
-      emailIsValid &&
-      phoneIsValid
-    ) {
-      setFormValid(true);
+      console.log(inputs);
     }
   };
 
@@ -105,16 +93,19 @@ const AuthForm = () => {
         onChange={inputChangedHandler.bind(this, "name")}
         value={inputs.name.value}
         invalid={inputs.name.isValid}
-        required
+        minLength={3}
       />
+
       <InputField
         label="Password"
         type="password"
         name="Password"
         onChange={inputChangedHandler.bind(this, "password")}
         value={inputs.password.value}
+        title="Password must have 1 small , 1 capital and 1 number "
         invalid={inputs.password.isValid}
-        required
+        minLength={8}
+        maxLength={20}
       />
       <InputField
         label="Confirm Password"
@@ -123,7 +114,8 @@ const AuthForm = () => {
         onChange={inputChangedHandler.bind(this, "confirmPassword")}
         value={inputs.confirmPassword.value}
         invalid={inputs.confirmPassword.isValid}
-        required
+        minLength={8}
+        maxLength={20}
       />
       <InputField
         label="Email Address"
@@ -131,8 +123,8 @@ const AuthForm = () => {
         name="Email Address"
         onChange={inputChangedHandler.bind(this, "email")}
         value={inputs.email.value}
+        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
         invalid={inputs.email.isValid}
-        required
       />
       <InputField
         label="Phone Number"
@@ -141,12 +133,11 @@ const AuthForm = () => {
         onChange={inputChangedHandler.bind(this, "phone")}
         value={inputs.phone.value}
         invalid={inputs.phone.isValid}
-        required
+        maxLength={12}
+        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
       />
       <div className="btnContainer">
-        <PrimaryButton type="submit" onClick={onSubmit}>
-          Submit
-        </PrimaryButton>
+        <PrimaryButton type="submit">Submit</PrimaryButton>
       </div>
     </form>
   );

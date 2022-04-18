@@ -6,45 +6,30 @@ const InputField = ({ label, invalid, type, ...otherProps }) => {
 
   if (invalid) {
     if (label === "Name") {
-      invalidText = (
-        <small className="invalidText">Please check your UserName.</small>
-      );
+      invalidText = "Please check your Name.";
     }
     if (label === "Password") {
-      invalidText = (
-        <small className="invalidText">
-          Password should between 6 to 20 characters which contain at least 1
-          numeric digit, 1 uppercase and 1 lowercase letter
-        </small>
-      );
+      invalidText =
+        "Password should between 6 to 20 characters which contain at least 1 numeric digit, 1 uppercase and 1 lowercase letter";
     }
     if (label === "Confirm Password") {
-      invalidText = (
-        <small className="invalidText">Password should be same</small>
-      );
+      invalidText = "Password should be same";
     }
     if (label === "Email Address") {
-      invalidText = (
-        <small className="invalidText">
-          Please enter your valid Email Address.
-        </small>
-      );
+      invalidText = "Please enter your valid Email Address.";
     }
     if (label === "Phone Number") {
-      invalidText = (
-        <small className="invalidText">
-          Please enter your valid Phone Number.
-        </small>
-      );
+      invalidText = "Please enter your valid Phone Number.";
     }
   }
 
+  const inputClass = invalid ? "input " : "input invalid";
+
   return (
     <div className="inputContainer">
+      <input className={inputClass} type={type} {...otherProps} />
       <label className="label">{label}</label>
-      <br />
-      <input className="input" type={type} {...otherProps} />
-      {invalidText}
+      <small className="invalidText">{invalidText}</small>
     </div>
   );
 };

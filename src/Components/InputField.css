@@ -7,6 +7,13 @@
   font-size: 16px;
   margin-bottom: 6px;
   color: brown;
+  position: absolute;
+  transform: translate(7px, -30px);
+}
+
+.input:focus ~ .label {
+  font-size: 8px;
+  /* transform: ; */
 }
 
 .input {
@@ -20,6 +27,16 @@
 }
 
 .invalidText {
-  color: #f00;
-  font-size: 18px;
+  color: #e61616;
+  font-size: 14px;
+}
+
+.input.invalid {
+  border-color: #e61616;
+  background-color: #fcd5b0;
+}
+
+.input::placeholder {
+  color: #814105;
+  font-size: 16px;
 }
